@@ -6,7 +6,7 @@ service mysql start
 
 mysql -u root < schema.sql
 
-echo "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1111'" | mysql -u root
+echo "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'" | mysql -u root
 
 node server/createData.js
 
