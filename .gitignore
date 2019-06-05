@@ -40,3 +40,6 @@ bower_components/
 db/config.js
 package-lock.json
 .DS_Store
+
+data1.csv
+data.csv
