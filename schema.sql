@@ -13,3 +13,4 @@ CREATE TABLE homes (
     votes             INT NOT NULL,
     PRIMARY KEY(id)
 );
+

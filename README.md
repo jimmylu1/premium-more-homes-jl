@@ -4,16 +4,10 @@ module: More homes you may like
 
 CRUD API Documentation:
 
-GET /MoreHomes/id
-Response:
-1 | https://s3-us-west-1.amazonaws.com/homes-pic/20.jpg | PRIVATE ROOM | North Ruthhaven | Penthouse Studio | 5584 | 4.26 | 1244
-Status: 200 OK Got more homes.
+API Endpoints
 
-POST /MoreHomes
-Response: Status:200 OK New home has been added.
-
-PUT /MoreHomes
-Response: Status:200 OK Home has been updated.
-
-DELETE /MoreHomes
-Response: Status:200 OK Home has been deleted.
+| Request |      Endpoint      | Input  |          Output          |                      Description                      |
+| ------- | :----------------: | :----: | :----------------------: | :---------------------------------------------------: |
+| GET     | /MoreHomes/:homeID | homeID | listings for that homeID |           get all listings for that homeID            |
+| POST    | /MoreHomes/:homeID |        |     Status code:201      | add a new homeID to joined table, update relationship |
+| DELETE  | /MoreHomes/:homeID | homeID |     Status code:200      | remove a listing for that homeID, update relationship |

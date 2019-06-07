@@ -1,9 +1,12 @@
 const fs = require("fs");
 const faker = require("faker");
 const img = require("./server/images.js");
-let dataStream = fs.createWriteStream("data1.csv");
+let dataStream = fs.createWriteStream("data.csv", {
+  encoding: "utf8",
+  flag: "a"
+});
 
-const createData = () => {
+const writeMoreHomes = () => {
   const houseType = [
     "ENTIRE HOUSE",
     "ENTIRE APARTMENT",
@@ -17,13 +20,13 @@ const createData = () => {
     "Penthouse Studio",
     "Perfect Weekender"
   ];
-
-  for (let i = 1; i <= 10000000; i += 1) {
+  dataStream.write(
+    "id, img, type, address, description, cost, rating, votes\n"
+  );
+  for (let i = 1; i <= 1000; i += 1) {
     let text =
-      i +
-      "," +
       img.getImg() +
-      "," +
+      " , " +
       houseType[Math.floor(Math.random() * houseType.length)] +
       "," +
       faker.address.city() +
@@ -36,8 +39,25 @@ const createData = () => {
       "," +
       faker.random.number({ min: 0, max: 3500 });
     dataStream.write(text + "\n");
+    if (i % 100000 === 0) {
+      console.log(i);
+    }
   }
   dataStream.end();
+  console.log("done");
 };
 
-createData();
+// const writeListings = () => {};
+
+//create homes table
+writeMoreHomes();
+
+//create listings relationship table
+
+// id, img, type, address, description, cost, rating, votes
+// 1, https://s3-us-west-1.amazonaws.com/homes-pic/12.jpg,ENTIRE HOUSE,Calistafort,Perfect Weekender,5767,4.68,2768
+
+// CREATE TABLE homes (id int NOT NULL,img text,type text,address text,description text,price int, rating numeric(1, 2), votes int)
+
+// id, img, type, address, description, cost, rating, votes
+// 1, https://s3-us-west-1.amazonaws.com/homes-pic/1.jpg , PRIVATE ROOM,Bernierfort,Perfect Weekender,2440,4.55,546

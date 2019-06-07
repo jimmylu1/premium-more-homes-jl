@@ -41,5 +41,6 @@ db/config.js
 package-lock.json
 .DS_Store
 
+data2.csv
 data1.csv
 data.csv
