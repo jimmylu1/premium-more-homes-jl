@@ -53,7 +53,7 @@ async function writeMoreHomes() {
       "," +
       faker.random.number({ min: 0, max: 3500 }) +
       "," +
-      Math.floor(Math.random() * 1e7);
+      Math.floor(1 + Math.random() * 9999999);
     let writeHome = dataStream.write(text + "\n");
     if (!writeHome) {
       await new Promise(resolve => {
@@ -71,11 +71,11 @@ async function writeMoreHomes() {
 //write listings
 // const writeListings = () => {
 async function writeListings() {
-  dataStream2.write("id, listings\n");
-  for (let i = 1; i < 10000000; i++) {
+  dataStream2.write("mainID, listingID\n");
+  for (let i = 1; i < 1000; i++) {
     for (let j = 1; j <= 15; j++) {
       let listing = (i - 1) * 15 + j;
-      let joined = i + " , " + Math.floor(Math.random() * 1e7);
+      let joined = i + " , " + Math.floor(1 + Math.random() * 9999999);
       let writeList = dataStream2.write(joined + "\n");
       if (!writeList) {
         await new Promise(resolve => {
@@ -88,7 +88,7 @@ async function writeListings() {
     }
   }
   dataStream2.end();
-  console.log("done");
+  console.log("done with listings");
 }
 
 async function writeUsers() {
@@ -110,10 +110,10 @@ async function writeUsers() {
 }
 
 //create homes table
-writeMoreHomes(); //complete data in data2.csv
+// writeMoreHomes(); //complete data in data2.csv
 
 //create listings relationship table
-// writeListings(); // complete data in data.csv
+writeListings(); // complete data in data.csv
 
 //create users who own each home
 // writeUsers();
