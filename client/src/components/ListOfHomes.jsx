@@ -1,5 +1,5 @@
-import React from 'react';
-import ListEntry from './ListEntry.jsx';
+import React from "react";
+import ListEntry from "./ListEntry.jsx";
 
 export default class ListOfHomes extends React.Component {
   constructor(props) {
@@ -8,8 +8,8 @@ export default class ListOfHomes extends React.Component {
     this.state = {
       maxWidth: 1160,
       minWidth: 670,
-      beginIndex: 0,
-    }
+      beginIndex: 0
+    };
 
     this.handleLeftClick = this.handleLeftClick.bind(this);
     this.handleRightClick = this.handleRightClick.bind(this);
@@ -18,13 +18,13 @@ export default class ListOfHomes extends React.Component {
 
   handleLeftClick(e) {
     this.setState({
-      beginIndex: this.state.beginIndex - 1,
+      beginIndex: this.state.beginIndex - 1
     });
   }
 
   handleRightClick(e) {
     this.setState({
-      beginIndex: this.state.beginIndex + 1,
+      beginIndex: this.state.beginIndex + 1
     });
   }
 
@@ -40,14 +40,29 @@ export default class ListOfHomes extends React.Component {
 
   render() {
     const endIndex = this.state.beginIndex + this.numberOfImages();
-    const leftVisible = this.state.beginIndex > 0 ? 'visible' : 'hidden';
-    const rightVisible = endIndex < this.props.data.length ? 'visible' : 'hidden';
+    const leftVisible = this.state.beginIndex > 0 ? "visible" : "hidden";
+    const rightVisible =
+      endIndex < this.props.data.length ? "visible" : "hidden";
     return (
       <div className="flex-container">
-        <button className="leftScroll" onClick={this.handleLeftClick} style={{ visibility: leftVisible }}>&lt;</button>
-        {this.props.data.slice(this.state.beginIndex, endIndex).map((entry) => <ListEntry entry={entry} key={entry.id} />)}
-        <button className="rightScroll" onClick={this.handleRightClick} style={{ visibility: rightVisible }}>&gt;</button>
+        <button
+          className="leftScroll"
+          onClick={this.handleLeftClick}
+          style={{ visibility: leftVisible }}
+        >
+          &lt;
+        </button>
+        {this.props.data.slice(this.state.beginIndex, endIndex).map(entry => (
+          <ListEntry entry={entry} key={entry.id} />
+        ))}
+        <button
+          className="rightScroll"
+          onClick={this.handleRightClick}
+          style={{ visibility: rightVisible }}
+        >
+          &gt;
+        </button>
       </div>
-    )
+    );
   }
 }

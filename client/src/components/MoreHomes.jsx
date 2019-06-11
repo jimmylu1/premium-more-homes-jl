@@ -1,6 +1,6 @@
-import React from 'react';
-import axios from 'axios';
-import ListOfHomes from './ListOfHomes.jsx';
+import React from "react";
+import axios from "axios";
+import ListOfHomes from "./ListOfHomes.jsx";
 
 class MoreHomes extends React.Component {
   constructor(props) {
@@ -9,8 +9,8 @@ class MoreHomes extends React.Component {
     this.state = {
       height: window.innerHeight,
       width: window.innerWidth,
-      data: [],
-    }
+      data: []
+    };
 
     this.handleResize = this.handleResize.bind(this);
   }
@@ -26,12 +26,14 @@ class MoreHomes extends React.Component {
     window.addEventListener("resize", this.handleResize);
     const search = window.location.search;
     const params = new URLSearchParams(search);
-    axios.get(`/MoreHomes?id=${params.get('roomid')}`)
-      .then((response) => {
-        this.setState({ data: response.data })
+    axios
+      .get(`/MoreHomes?id=${params.get("roomid")}`)
+      .then(response => {
+        console.log("got data from client!");
+        this.setState({ data: response.data.rows });
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(error => {
+        console.log(error);
       });
   }
 
@@ -45,12 +47,13 @@ class MoreHomes extends React.Component {
         <div className="moduleTitle">
           <span>More homes you may like</span>
         </div>
-        <ListOfHomes data={this.state.data}
+        <ListOfHomes
+          data={this.state.data}
           height={this.state.height}
           width={this.state.width}
         />
       </div>
-    )
+    );
   }
 }
 
