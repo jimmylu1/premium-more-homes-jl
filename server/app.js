@@ -1,7 +1,6 @@
 const compression = require("compression");
 const express = require("express");
 const bodyParser = require("body-parser");
-// const dbModels = require("../db/models.js");
 const dbModels = require("../db/conn.js");
 
 const createApp = dbConnection => {
@@ -11,17 +10,10 @@ const createApp = dbConnection => {
   app.use(bodyParser.json());
   app.use(express.static(`${__dirname}/../public/dist`));
 
-  app.get("/MoreHomes", (req, res) => {
-    dbModels.getAll(dbConnection, (err, data) => {
-      if (err) {
-        console.log("error on server");
-        res.status(500).send();
-      } else {
-        console.log("got more homes");
-        res.status(200).send(data);
-      }
-    });
-  });
+  app.get("/MoreHomes/:mainid", dbModels.getListings);
+  app.post("/MoreHomes", dbModels.addListing);
+  app.delete("/MoreHomes", dbModels.deleteListing);
+  app.put("/MoreHomes", dbModels.updateListing);
 
   return app;
 };
