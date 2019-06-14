@@ -41,8 +41,11 @@ db/config.js
 package-lock.json
 .DS_Store
 
-data2.csv
-data1.csv
-data.csv
-noSQLData.csv
+data/data2.csv
+data/data1.csv
+data/data.csv
+data/noSQLData.csv
 db/config.js
+
+hello.yml
+newrelic.js

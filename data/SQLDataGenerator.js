@@ -1,6 +1,6 @@
 const fs = require("fs");
 const faker = require("faker");
-const img = require("./server/images.js");
+const img = require("../server/images.js");
 //homes
 let dataStream = fs.createWriteStream("data2.csv", {
   encoding: "utf8",

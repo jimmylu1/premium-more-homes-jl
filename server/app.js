@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const dbModels = require("../db/conn.js");
 
-const createApp = dbConnection => {
+const createApp = client => {
   const app = express();
 
   app.use(compression());
