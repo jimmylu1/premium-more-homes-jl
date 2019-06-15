@@ -3,6 +3,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const dbModels = require("../db/conn.js");
 
+//routes
+
 const createApp = client => {
   const app = express();
 
