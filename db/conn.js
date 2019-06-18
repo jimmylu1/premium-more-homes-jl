@@ -3,7 +3,7 @@ const redis = require("redis");
 const config = {
   user: "postgres",
   password: "password",
-  host: "ec2-18-222-152-193.us-east-2.compute.amazonaws.com",
+  host: "ec2-3-18-106-84.us-east-2.compute.amazonaws.com",
   port: 5432,
   database: "more_homes"
 };
