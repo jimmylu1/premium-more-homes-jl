@@ -1,6 +1,14 @@
 const { Pool } = require("pg");
-const config = require("./config.js");
+// const config = require("./config.js");
 const redis = require("redis");
+const config = {
+  user: "postgres",
+  password: "password",
+  host: "ec2-18-222-152-193.us-east-2.compute.amazonaws.com",
+  port: 5432,
+  database: "more_homes"
+};
+
 const pool = new Pool(config);
 
 //redis
