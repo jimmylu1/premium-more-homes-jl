@@ -10,17 +10,17 @@ const config = {
 
 const pool = new Pool(config);
 
+pool
+  .connect()
+  .then(() => console.log("Postgres connected!!"))
+  .catch(err => console.log("error in db:", err));
+
 //redis
 const client = redis.createClient();
 
 client.on("error", err => {
   console.log("Error " + err);
 });
-
-pool
-  .connect()
-  .then(() => console.log("Postgres connected!!"))
-  .catch(err => console.log("error in db:", err));
 
 const getListings = (req, res) => {
   const id = req.query.id;
