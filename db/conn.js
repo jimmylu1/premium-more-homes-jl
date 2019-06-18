@@ -1,5 +1,4 @@
 const { Pool } = require("pg");
-// const config = require("./config.js");
 const redis = require("redis");
 const config = {
   user: "postgres",
