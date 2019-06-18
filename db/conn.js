@@ -1,29 +1,49 @@
 const { Pool } = require("pg");
 const config = require("./config.js");
+const redis = require("redis");
 const pool = new Pool(config);
+
+//redis
+const client = redis.createClient();
+
+client.on("error", err => {
+  console.log("Error " + err);
+});
 
 pool
   .connect()
-  .then(() => console.log("db connected!!"))
+  .then(() => console.log("Postgres connected!!"))
   .catch(err => console.log("error in db:", err));
 
 const getListings = (req, res) => {
-  const mainid = req.params.mainid;
+  const id = req.query.id;
   const query =
     "select (img, type, address, description, price, rating, votes) from homes inner join listings on homes.id = listings.listingid where mainid=$1";
-  pool.query(query, [mainid], (err, results) => {
-    if (err) {
-      res.status(404).send(err);
+  //GET FROM REDIS
+  client.get(`${id}`, (err, result) => {
+    if (result) {
+      // console.log("result from redis", result);
+      res.status(200).send(JSON.parse(result));
+    } else {
+      //GET FROM POSTGRES
+      pool.query(query, [id], (err, results) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          client.set(`${id}`, JSON.stringify(results.rows));
+          // console.log("result from postgres", results.rows);
+          res.status(200).send(results.rows);
+        }
+      });
     }
-    res.status(200).send(results);
   });
 };
 
 const addListing = (req, res) => {
-  const { mainid, listingid } = req.body;
+  const { id, listingid } = req.body;
   const query = "insert into listings(mainid, listingid) values ($1, $2)";
 
-  pool.query(query, [mainid, listingid], (err, results) => {
+  pool.query(query, [id, listingid], (err, results) => {
     if (err) {
       res.status(404).send(err);
     }
@@ -32,10 +52,10 @@ const addListing = (req, res) => {
 };
 
 const deleteListing = (req, res) => {
-  const { mainid, listingid } = req.body;
+  const { id, listingid } = req.body;
   const query = "delete from listings where mainid=$1 and listingid=$2";
 
-  pool.query(query, [mainid, listingid], (err, results) => {
+  pool.query(query, [id, listingid], (err, results) => {
     if (err) {
       res.status(404).send(err);
     }

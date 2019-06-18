@@ -52,9 +52,11 @@ export default class ListOfHomes extends React.Component {
         >
           &lt;
         </button>
-        {this.props.data.slice(this.state.beginIndex, endIndex).map(entry => (
-          <ListEntry entry={entry} key={entry.id} />
-        ))}
+        {this.props.data
+          .slice(this.state.beginIndex, endIndex)
+          .map((entry, key) => (
+            <ListEntry entry={entry} key={key} />
+          ))}
         <button
           className="rightScroll"
           onClick={this.handleRightClick}

@@ -26,13 +26,12 @@ class MoreHomes extends React.Component {
     window.addEventListener("resize", this.handleResize);
     const search = window.location.search;
     const params = new URLSearchParams(search);
-    console.log("search", search);
-    console.log("params", params);
     axios
-      .get(`/MoreHomes?id=${params.get("roomid")}`)
+      .get(`/MoreHomes?id=${params.get("id")}`)
       .then(response => {
-        console.log("got data from client!");
-        this.setState({ data: response.data.rows });
+        console.log("response", response.data);
+        this.setState({ data: response.data });
+        // console.log("axios working");
       })
       .catch(error => {
         console.log(error);
